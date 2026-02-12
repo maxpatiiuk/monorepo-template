@@ -44,7 +44,7 @@ Document the following about your project (as needed depending on team size):
 - governance structure
 - API references
 - conventions, guidelines, best practices, tips
-- areas of responsibilities, contacts, internal communication channels
+- areas of responsibility, contacts, internal communication channels
 - onboarding resources, contributing guidelines
 - policies (third-party dependencies, licenses, versioning, marketing)
 - internal learning resources
