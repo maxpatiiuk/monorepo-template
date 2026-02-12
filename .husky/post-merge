@@ -1,0 +1,6 @@
+#!/bin/sh
+# Check if pnpm-lock.yaml was changed in the last merge
+if git diff --name-only HEAD@{1} HEAD | grep --quiet "pnpm-lock.yaml"; then
+  echo "pnpm-lock.yaml has changed. Running 'pnpm install'..."
+  pnpm install
+fi

@@ -1,0 +1,14 @@
+{
+  "name": "@monorepo/typescript-config",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "tsconfig.json",
+    "tsconfig.node.json",
+    "with-strict-imports.json"
+  ],
+  "peerDependencies": {
+    "tslib": "0.0.0",
+    "typescript": "0.0.0"
+  }
+}

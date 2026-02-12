@@ -1,0 +1,19 @@
+{
+  "name": "@monorepo/project-docs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "build-debug": "node --inspect node_modules/vitepress/bin/vitepress.js build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@monorepo/typescript-config": "workspace:*",
+    "search-insights": "^2.17.3",
+    "tslib": "2.8.1",
+    "typescript": "5.9.3",
+    "vitepress": "1.6.4"
+  }
+}

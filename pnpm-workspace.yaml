@@ -1,0 +1,15 @@
+packages:
+  - packages/docs-packages/*
+  - packages/starter-packages/*
+  - packages/support-packages/*
+
+autoInstallPeers: false
+
+allowBuilds:
+  esbuild: true # doc: https://esbuild.github.io/getting-started/#additional-npm-flags
+
+minimumReleaseAge: 1440 # 1 day
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - "vite@5.4.21"
