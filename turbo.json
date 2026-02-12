@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"]
+    },
+
+    "start": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": ["./tsconfig.json", "./with-strict-imports.json"],
+  "compilerOptions": {
+    // Do not include DOM types
+    // We use ESNext as most of post ES2024 features are already supported by Node.js
+    "lib": ["ESNext"],
+    "sourceMap": true
+  }
+}

@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# Build Artifacts
+/packages/**/dist/
+
+# test artifacts
+/packages/**/coverage/
+
+# misc
+.DS_Store
+Thumbs.db
+
+# Vite & Vitest temporary files
+/packages/**/vite.config.ts.timestamp*
+/packages/docs-packages/project/docs/.vitepress/cache/
+
+# turbo
+/packages/**/.turbo/
+/.turbo/
+
+# JetBrains
+/.idea
+
+# Visual Studio Code
+.vscode/
+!/.vscode/settings.json
+!/.vscode/tasks.json
+!/.vscode/launch.json
+!/.vscode/extensions.json

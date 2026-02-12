@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@monorepo/typescript-config/tsconfig.json",
+  "include": [
+    "docs/**/*.ts",
+    "docs/**/*.vue",
+    "docs/**/*.md",
+    "docs/.vitepress/*"
+  ]
+}
