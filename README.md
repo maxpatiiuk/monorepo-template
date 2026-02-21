@@ -133,7 +133,7 @@ Use [ts-morph](https://ts-morph.com/) to automate TypeScript code refactoring.
 You can create a monorepo package to house the codemod.
 
 As an example, Esri publishes an
-[@arcgis/codemod](http://npmjs.com/package/@arcgis/codemod)
+[@arcgis/codemod](https://www.npmjs.com/package/@arcgis/codemod)
 
 ## Monorepo docs (VitePress)
 
