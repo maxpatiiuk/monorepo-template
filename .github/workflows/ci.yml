@@ -15,8 +15,11 @@ jobs:
   build-lint-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          # Fetch a branch, not detached HEAD (to allow committing changes)
+          ref: ${{ github.head_ref }}
+          fetch-depth: ${{ github.ref == 'refs/heads/main' && 2 || 0 }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
