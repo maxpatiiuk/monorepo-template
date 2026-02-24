@@ -7,6 +7,12 @@
       "outputs": ["dist/**"]
     },
 
+    "test": {
+      "dependsOn": ["^test"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": []
+    },
+
     "start": {
       "cache": false,
       "persistent": true

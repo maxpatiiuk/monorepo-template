@@ -1,6 +1,6 @@
 # monorepo-template
 
-A scalable template for a pnpm monorepo, using Turbo, Vite, and TypeScript.
+A scalable template for a pnpm monorepo, using Turborepo, Vite, and TypeScript.
 
 This was presented at Esri's Dev & Tech Summit 2026 in the
 [ArcGIS Maps SDK for JavaScript: A Look Under the Hood](https://github.com/maxpatiiuk/esri-dev-summit-presentations/tree/main/2026/a-look-under-the-hood)
@@ -18,7 +18,7 @@ tooling ecosystem changes rapidly and packages age quickly.
 
 ## What this template includes
 
-- [PNPM as a fast and secure package manager](./pnpm-workspace.yaml)
+- [pnpm as a fast and secure package manager](./pnpm-workspace.yaml)
 - [TypeScript configuration](./packages/support-packages/typescript-config/)
 - [Prettier configuration](./packages/support-packages/prettier-config/)
 - [Runtime utils package](./packages/support-packages/runtime-utils/)
@@ -34,6 +34,7 @@ tooling ecosystem changes rapidly and packages age quickly.
     [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
     standard is used as it is visually scannable by humans and machine-readable
     for automation.
+- [Basic pr/main branch build,lint,test CI](./.github/workflows/ci.yml)
 
 ## What you can add after forking the template
 
@@ -61,6 +62,7 @@ Document the following about your project (as needed depending on team size):
 Write GitHub workflows for:
 
 - On push to PR and main branch: build, lint, test, deploy, cache
+- Make PR CI auto-fix
 - Increment version, branch for release, cut a release
 - Issue management automation (assigning labels, milestones, authors)
 
@@ -90,7 +92,28 @@ detecting bugs, and autofixing common issues.
 - Run ESLint on changed files in `lint-staged.config.js` to keep files always
   lint-free
 
+### Ignore files
+
+Place `.gitignore` and `.prettierignore` at the root only.
+
+- `.gitignore` - ignore build artifacts that should not be checked-in
+- `.prettierignore` - don't format checked-in build artifacts (`pnpm-lock.yaml`)
+
+Recommendations:
+
+- They will be auto-discovered by Prettier, Git, and VSCode.
+- Multiple ignore files are not respected by all tools.
+- Bonus: in `eslint.config.js`, pass `.gitignore` and `.prettierignore` contents
+  to ESLint to have one less ignore file to manage.
+
 ## Custom monorepo CLIs
+
+[commander](https://www.npmjs.com/package/commander) makes it easy to author CLI
+scripts. You can write scripts to automate common monorepo chores. These scripts
+can be called by GitHub actions, pre-commit hooks, or manually by developers.
+
+Starting with Node.js 24, you can author scripts in TypeScript without requiring
+a build step.
 
 - Write a CLI that will be called by `lint-staged.config.js` on any modified
   file to error if accidentally trying to commit an overly large file and
@@ -100,6 +123,19 @@ detecting bugs, and autofixing common issues.
   the changed files
 - On package.json changes, validate that dependencies are declared correctly and
   are using PNPM catalogs
+
+### Codemods
+
+Codemods are programs that automate code changes and refactoring.
+
+They are useful for migrations, and addressing deprecations.
+
+Use [ts-morph](https://ts-morph.com/) to automate TypeScript code refactoring.
+
+You can create a monorepo package to house the codemod.
+
+As an example, Esri publishes an
+[@arcgis/codemod](https://www.npmjs.com/package/@arcgis/codemod)
 
 ## Monorepo docs (VitePress)
 
@@ -123,7 +159,8 @@ Create Node.js utils for build-time concerns:
 ## Misc
 
 - Enable
-  [Turbo remote cache](https://turborepo.dev/docs/core-concepts/remote-caching)
+  [Turborepo remote cache](https://turborepo.dev/docs/core-concepts/remote-caching)
   to improve performance by sharing build cache with CI and other devs
 - Enable [PNPM Catalogs](https://pnpm.io/catalogs) to manage all dependency
-  versions in a single place, ensuring monorepo packages use consistent dependency versions
+  versions in a single place, ensuring monorepo packages use consistent
+  dependency versions
