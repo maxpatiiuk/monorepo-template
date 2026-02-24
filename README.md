@@ -34,6 +34,7 @@ tooling ecosystem changes rapidly and packages age quickly.
     [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
     standard is used as it is visually scannable by humans and machine-readable
     for automation.
+- [Basic pr/main branch build,lint,test CI](./.github/workflows/ci.yml)
 
 ## What you can add after forking the template
 
@@ -61,6 +62,7 @@ Document the following about your project (as needed depending on team size):
 Write GitHub workflows for:
 
 - On push to PR and main branch: build, lint, test, deploy, cache
+- Make PR CI auto-fix
 - Increment version, branch for release, cut a release
 - Issue management automation (assigning labels, milestones, authors)
 

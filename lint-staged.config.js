@@ -1,4 +1,5 @@
-const prettierCommand = `prettier --config prettier.config.js --no-editorconfig --log-level warn --write`;
+const shouldAutoFix = !!process.env.NO_AUTO_FIX;
+const prettierCommand = `prettier --config prettier.config.js --no-editorconfig --log-level warn ${shouldAutoFix ? "--write" : "--check"}`;
 
 /**
  * @filename: lint-staged.config.js

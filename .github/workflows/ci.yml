@@ -1,0 +1,67 @@
+name: ci
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: Build Pull Request - ${{ github.ref_name || github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm turbo build
+
+      - name: Lint (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          # Lint all files changed since the head of the base branch
+          node --run monorepo:lint -- --diff="origin/${{ github.base_ref }}...origin/${{ github.head_ref }}"
+
+          git add .
+          if git diff-index --quiet HEAD --; then
+            echo "Linters detected issues. Committing autofix changes." >> $GITHUB_STEP_SUMMARY
+
+            # Author by the bot and the committer is the person who made the last commit that triggered this workflow
+            # It is not in the payload. We have to look at the log.
+            # Uses the -c option to set the committer name and email just for that commit.
+            git \
+              -c "committer.name=$( git log -1 --pretty=format:'%cn' )" \
+              -c "committer.email=$( git log -1 --pretty=format:'%ce' )" \
+              commit \
+                --message "chore(lint): lint code with ESLint and Prettier [lint-commit]" \
+                --message "Triggered by ${{ github.event.pull_request.head.sha }} on branch ${{ github.head_ref }}" \
+                --no-verify
+
+            git push
+          fi
+
+      - name: Lint (main)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          # Lint files changed by the last merge/squash commit
+          NO_AUTO_FIX=1 node --run monorepo:lint -- --diff "HEAD~1...HEAD"
+
+      - name: Test
+        run: pnpm turbo test
