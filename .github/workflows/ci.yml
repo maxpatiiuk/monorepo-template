@@ -53,6 +53,7 @@ jobs:
               -c "committer.name=$( git log -1 --pretty=format:'%cn' )" \
               -c "committer.email=$( git log -1 --pretty=format:'%ce' )" \
               commit \
+                --author "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" \
                 --message "chore(lint): lint code with ESLint and Prettier [lint-commit]" \
                 --message "Triggered by ${{ github.event.pull_request.head.sha }} on branch ${{ github.head_ref }}" \
                 --no-verify
