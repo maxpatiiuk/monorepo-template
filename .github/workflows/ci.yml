@@ -43,7 +43,7 @@ jobs:
           node --run monorepo:lint -- --diff="origin/${{ github.base_ref }}...origin/${{ github.head_ref }}"
 
           git add .
-          if git diff-index --quiet HEAD --; then
+          if ! git diff-index --quiet HEAD --; then
             echo "Linters detected issues. Committing autofix changes." >> $GITHUB_STEP_SUMMARY
 
             # Author by the bot and the committer is the person who made the last commit that triggered this workflow
