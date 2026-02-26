@@ -53,6 +53,16 @@ Document the following about your project (as needed depending on team size):
 - release management
 - links to preview deployments
 
+VitePress works nicely for this. Additional things to configure:
+
+- Auto-generate sidebar using
+  [vitepress-sidebar](https://www.npmjs.com/package/vitepress-sidebar)
+- Read the monorepo's CODEOWNERs file to display authorship information at the
+  bottom of each doc page
+- Read Git to display `last modified` date at the bottom of each doc page
+- Allow embedding monorepo files in docs with a link to the original full file
+- Add RSS feed. Notify team's communication channel when project docs are updated
+
 ### Git LFS
 
 - Configure [Git LFS](https://git-lfs.com/) to keep monorepo size in check
@@ -136,16 +146,6 @@ You can create a monorepo package to house the codemod.
 
 As an example, Esri publishes an
 [@arcgis/codemod](https://www.npmjs.com/package/@arcgis/codemod)
-
-## Monorepo docs (VitePress)
-
-- Auto-generate sidebar using
-  [vitepress-sidebar](https://www.npmjs.com/package/vitepress-sidebar)
-- Read the monorepo's CODEOWNERs file to display authorship information at the
-  bottom of each doc page
-- Read Git to display `last modified` date at the bottom of each doc page
-- Allow embedding monorepo files in docs with a link to the original full file
-- Add RSS feed. Notify team's communication channel when project docs are updated
 
 ## Build utils
 
